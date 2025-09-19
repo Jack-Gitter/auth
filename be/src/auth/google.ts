@@ -9,6 +9,7 @@ export async function auth(req: Request, res: Response) {
         const email = req.params.email as string
         const userRepository = dataSource.getRepository(User)
         let user = await userRepository.findOneBy({email})
+        console.log(user)
         if (!user) {
              user = await userRepository.save({email})
         }

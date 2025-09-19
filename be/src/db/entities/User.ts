@@ -7,7 +7,7 @@ export class User {
     @Column({primary: true})
     email: string
 
-    @ManyToMany(() => Role)
+    @ManyToMany(() => Role, {cascade: true})
     @JoinTable()
     roles: Role[] 
 
