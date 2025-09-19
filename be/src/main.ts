@@ -16,7 +16,7 @@ async function main() {
       res.send('Hello World!')
     })
 
-    app.get('/google/auth/:email', auth)
+    app.post('/google/login/:email', auth)
 
     app.listen(port, () => {
       console.log(`Example app listening on port ${port}`)
