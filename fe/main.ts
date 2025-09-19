@@ -10,7 +10,7 @@ async function main() {
     })
 
     app.get('/login', (req, res) => {
-        res.send('login')
+        res.sendFile(__dirname + '/login/index.html')
     })
 
     app.listen(port, () => {
