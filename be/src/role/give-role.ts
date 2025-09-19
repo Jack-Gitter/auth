@@ -10,9 +10,7 @@ export async function giveRole(req: Request, res: Response) {
         const userRepository = dataSource.getRepository(User)
         const user = await userRepository.findOneBy({email})
         if (user) {
-            if (!user?.roles) {
-                user.roles = []
-            }
+            user.roles = user.roles ?? []
             user.roles.push(new Role(type))
             await userRepository.save(user)
             res.status(200).send()
