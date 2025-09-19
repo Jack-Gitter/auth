@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import { AUTH_PROVIDER, JWTPayload } from "../types"
 import { Request, Response } from 'express'
 
+// change the email to the jwt access token, 
 export async function auth(req: Request, res: Response) {
     try {
         const email = req.params.email as string
@@ -19,6 +20,7 @@ export async function auth(req: Request, res: Response) {
         }
         const roles = user.roles.map(role => role.type)
         const jwtPayload: JWTPayload = {
+            email: email,
             roles: roles, 
             authProvider: AUTH_PROVIDER.google,
             accessToken: ''
