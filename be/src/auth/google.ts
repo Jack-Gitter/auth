@@ -6,6 +6,16 @@ import { Request, Response } from 'express'
 
 // change the email to the jwt access token provided by google login
 export async function auth(req: Request, res: Response) {
+    const accessToken = req.body.credential as string
+    const csrfToken = req.body.g_csrf_token as string
+    const csrfCookie = req.cookies.g_csrf_token as string
+    if (csrfToken !== csrfCookie) {
+        res.status(401).send('Nice try')
+    }
+    // need to verify signature here and deocde jwt
+    // make sure csrfToken in body matches one in JWT
+    jwt.verify(accessToken, 'sec')
+    //
     try {
         const email = req.params.email as string
         const userRepository = dataSource.getRepository(User)
