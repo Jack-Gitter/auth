@@ -5,8 +5,8 @@ import { JWTPayload } from "../types"
 import { Request, Response } from 'express'
 
 export async function auth(req: Request, res: Response) {
-    const email = req.params.email
-    if (email)  {
+    try {
+        const email = req.params.email as string
         const userRepository = dataSource.getRepository(User)
         let user = await userRepository.findOneBy({email})
         if (!user) {
@@ -18,7 +18,10 @@ export async function auth(req: Request, res: Response) {
         }
         const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '')
         res.send(token)
-    } else {
-        res.status(400).send('Invalid Email')
+    } catch (error) {
+        if (error instanceof Error) {
+            res.status(400).send(error.message)
+        }
+        res.status(500).send('Something went Wrong')
     }
 }

@@ -4,6 +4,10 @@ import { ROLE_TYPE } from "../../types";
 @Entity()
 export class Role {
 
+    constructor(type: ROLE_TYPE) {
+        this.type = type
+    }
+
     @PrimaryGeneratedColumn()
     id: number
 
