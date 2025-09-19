@@ -1,6 +1,7 @@
 import { DataSource } from "typeorm"
+import { Role } from "./entities/Role"
 
-export const appDataSource new DataSource({
+export const appDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
     port: 5432,
@@ -9,7 +10,7 @@ export const appDataSource new DataSource({
     database: "test",
     synchronize: true,
     logging: true,
-    entities: [],
+    entities: [Role],
     subscribers: [],
     migrations: [],
 })
