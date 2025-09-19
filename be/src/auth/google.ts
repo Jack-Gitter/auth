@@ -4,7 +4,7 @@ import jwt from 'jsonwebtoken'
 import { AUTH_PROVIDER, JWTPayload } from "../types"
 import { Request, Response } from 'express'
 
-// change the email to the jwt access token, 
+// change the email to the jwt access token provided by google login
 export async function auth(req: Request, res: Response) {
     try {
         const email = req.params.email as string
