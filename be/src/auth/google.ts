@@ -6,7 +6,6 @@ import { Request, Response } from 'express'
 
 export async function auth(req: Request, res: Response) {
     const email = req.params.email
-    console.log(req.params.email)
     if (email)  {
         const userRepository = dataSource.getRepository(User)
         let user = await userRepository.findOneBy({email})
