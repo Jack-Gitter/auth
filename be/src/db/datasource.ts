@@ -16,4 +16,3 @@ export const dataSource = new DataSource({
     entities: [Role, User],
     migrations: [Migrations1758290248287, Migrations1758290551813],
 })
-await dataSource.initialize()
