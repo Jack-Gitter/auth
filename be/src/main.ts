@@ -14,10 +14,6 @@ async function main() {
     const port = 3000
     await dataSource.initialize()
 
-    app.get('/', (req, res) => {
-      res.send('Hello World!')
-    })
-
     app.post('/login/google/:email', auth)
     app.post('/role/:type', addRole)
 
