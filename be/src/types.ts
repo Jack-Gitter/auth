@@ -10,8 +10,10 @@ export enum AUTH_PROVIDER {
 }
 
 export type JWTPayload = {
+    iss: string,
+    sub: string
+    aud: string,
     roles: ROLE_TYPE[]
-    email: string
     authProvider: AUTH_PROVIDER
     accessToken: string
 }

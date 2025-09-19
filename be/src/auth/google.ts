@@ -20,12 +20,14 @@ export async function auth(req: Request, res: Response) {
         }
         const roles = user.roles.map(role => role.type)
         const jwtPayload: JWTPayload = {
-            email: email,
+            sub: email,
+            iss: 'Test App',
+            aud: 'Test App',
             roles: roles, 
             authProvider: AUTH_PROVIDER.google,
             accessToken: ''
         }
-        const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '')
+        const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '', {expiresIn: 60 * 60})
         res.send(token)
     } catch (error) {
         if (error instanceof Error) {
