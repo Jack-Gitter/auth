@@ -7,7 +7,7 @@ export class Role {
     @PrimaryGeneratedColumn()
     id: number
 
-    @Column({type: 'enum', enum: ROLE_TYPE, default: ROLE_TYPE.viewer})
+    @Column({type: 'enum', enum: ROLE_TYPE, default: ROLE_TYPE.viewer, unique: true})
     type: ROLE_TYPE
 
 }
