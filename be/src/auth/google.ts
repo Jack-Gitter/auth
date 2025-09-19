@@ -22,7 +22,8 @@ export async function auth(req: Request, res: Response) {
     } catch (error) {
         if (error instanceof Error) {
             res.status(400).send(error.message)
+        } else {
+            res.status(500).send('Something went Wrong')
         }
-        res.status(500).send('Something went Wrong')
     }
 }

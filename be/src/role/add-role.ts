@@ -13,7 +13,8 @@ export async function addRole(req: Request, res: Response) {
         res.status(400)
         if (error instanceof Error) {
             res.status(400).send(error.message)
+        } else {
+            res.status(500).send('Something went wrong creating a role')
         }
-        res.status(500).send('Something went wrong creating a role')
     }
 }
