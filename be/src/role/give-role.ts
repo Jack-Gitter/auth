@@ -7,6 +7,9 @@ export async function giveRole(req: Request, res: Response) {
     try {
         const email = req.params.email as string
         const type = req.params.type as ROLE_TYPE
+        if (!Object.values(ROLE_TYPE).includes(type)) {
+            res.status(400).send('Invalid Role Type')
+        }
         const userRepository = dataSource.getRepository(User)
         const user = await userRepository.findOneBy({email})
         if (user) {
