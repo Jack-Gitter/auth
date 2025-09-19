@@ -6,7 +6,7 @@ import { Migrations1758290248287 } from "./migrations/1758290248287-migrations"
 import { Migrations1758290551813 } from "./migrations/1758290551813-migrations"
 configDotenv()
 
-export const appDataSource = new DataSource({
+export const dataSource = new DataSource({
     type: "postgres",
     host: "localhost",
     port: Number(process.env.POSTGRES_PORT),
@@ -16,3 +16,4 @@ export const appDataSource = new DataSource({
     entities: [Role, User],
     migrations: [Migrations1758290248287, Migrations1758290551813],
 })
+await dataSource.initialize()
