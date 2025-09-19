@@ -6,7 +6,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "migration:generate": "npx typeorm-ts-node-commonjs migration:generate src/db/migrations/ --dataSource src/db/datasource.ts"
+    "migrations:generate": "npx typeorm-ts-node-commonjs migration:generate src/db/migrations/ -d src/db/datasource.ts",
+    "migrations:run": "npx typeorm-ts-node-commonjs migration:run -d src/db/datasource.ts"
   },
   "repository": {
     "type": "git",

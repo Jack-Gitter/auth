@@ -2,6 +2,7 @@ import { DataSource } from "typeorm"
 import { User } from "./entities/User"
 import { configDotenv } from "dotenv"
 import { Role } from "./entities/Role"
+import { Migrations1758289757899 } from "./migrations/1758289757899-migrations"
 configDotenv()
 
 export const appDataSource = new DataSource({
@@ -12,5 +13,5 @@ export const appDataSource = new DataSource({
     password: process.env.POSTGRES_PASSWORD ?? ' ',
     database: process.env.POSTGRES_DB ?? ' ',
     entities: [Role, User],
-    migrations: [],
+    migrations: [Migrations1758289757899],
 })
