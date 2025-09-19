@@ -6,6 +6,9 @@ import { ROLE_TYPE } from '../types'
 export async function addRole(req: Request, res: Response) {
     const roleRepository = dataSource.getRepository(Role)
     const type = req.params.type as ROLE_TYPE
+    if (!Object.values(ROLE_TYPE).includes(type)) {
+        res.status(400).send('Invalid role type')
+    }
     try {
         await roleRepository.save({type}) 
         res.status(200).send()

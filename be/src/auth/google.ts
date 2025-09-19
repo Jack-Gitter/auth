@@ -8,14 +8,18 @@ export async function auth(req: Request, res: Response) {
     try {
         const email = req.params.email as string
         const userRepository = dataSource.getRepository(User)
-        let user = await userRepository.findOneBy({email})
-        console.log(user)
+        let user = await userRepository.findOne(
+            {
+                where: {email},
+                relations: ['roles']
+            }
+        )
         if (!user) {
              user = await userRepository.save({email})
         }
-        const roles = user?.roles?.map(role => role.type)
+        const roles = user.roles.map(role => role.type)
         const jwtPayload: JWTPayload = {
-            roles: roles ?? []
+            roles: roles 
         }
         const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '')
         res.send(token)

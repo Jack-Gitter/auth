@@ -11,14 +11,18 @@ export async function giveRole(req: Request, res: Response) {
             res.status(400).send('Invalid Role Type')
         }
         const userRepository = dataSource.getRepository(User)
-        const user = await userRepository.findOneBy({email})
-        if (user) {
-            user.roles = user.roles ?? []
-            user.roles.push(new Role(type))
+        const roleRepository = dataSource.getRepository(Role)
+        const user = await userRepository.findOne({
+            where: {email},
+            relations: ['roles'],
+        })
+        const role = await roleRepository.findOneBy({type})
+        if (user && role) {
+            user.roles.push(role)
             await userRepository.save(user)
             res.status(200).send()
         } else {
-            res.status(404).send('No user found with provided email')
+            res.status(404).send('No user or role found')
         }
     } catch (error) {
         if (error instanceof Error) {
