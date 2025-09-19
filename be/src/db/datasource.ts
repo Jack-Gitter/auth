@@ -4,13 +4,10 @@ import { Role } from "./entities/Role"
 export const appDataSource = new DataSource({
     type: "postgres",
     host: "localhost",
-    port: 5432,
-    username: "test",
-    password: "test",
-    database: "test",
-    synchronize: true,
-    logging: true,
+    port: Number(process.env.POSTGRES_DB),
+    username: process.env.POSTGRES_USER ?? '',
+    password: process.env.POSTGRES_PASSWORD ?? '',
+    database: process.env.POSTGRES_DB ?? '',
     entities: [Role],
-    subscribers: [],
     migrations: [],
 })
