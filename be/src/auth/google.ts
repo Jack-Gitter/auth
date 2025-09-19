@@ -12,9 +12,9 @@ export async function auth(req: Request, res: Response) {
         if (!user) {
              user = await userRepository.save({email})
         }
-        const userRoles = user?.roles?.map(role => role.type)
+        const roles = user?.roles?.map(role => role.type)
         const jwtPayload: JWTPayload = {
-            roles: userRoles ?? []
+            roles: roles ?? []
         }
         const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '')
         res.send(token)

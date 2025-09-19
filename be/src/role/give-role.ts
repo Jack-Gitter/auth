@@ -23,6 +23,6 @@ export async function giveRole(req: Request, res: Response) {
         if (error instanceof Error) {
             res.status(400).send(error.message)
         } 
-        res.status(500).send('something went wrong')
+        res.status(500).send('Something went wrong')
     }
 }
