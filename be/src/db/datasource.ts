@@ -1,5 +1,6 @@
 import { DataSource } from "typeorm"
 import { Role } from "./entities/Role"
+import { User } from "./entities/User"
 
 export const appDataSource = new DataSource({
     type: "postgres",
@@ -8,6 +9,6 @@ export const appDataSource = new DataSource({
     username: process.env.POSTGRES_USER ?? '',
     password: process.env.POSTGRES_PASSWORD ?? '',
     database: process.env.POSTGRES_DB ?? '',
-    entities: [Role],
+    entities: [Role, User],
     migrations: [],
 })
