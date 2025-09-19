@@ -3,6 +3,7 @@ import { User } from "../db/entities/User"
 import jwt from 'jsonwebtoken'
 import { AUTH_PROVIDER, JWTPayload } from "../types"
 import { Request, Response } from 'express'
+import {OAuth2Client} from 'google-auth-library'
 
 // change the email to the jwt access token provided by google login
 export async function auth(req: Request, res: Response) {
@@ -12,10 +13,14 @@ export async function auth(req: Request, res: Response) {
     if (csrfToken !== csrfCookie) {
         res.status(401).send('Nice try')
     }
-    // need to verify signature here and deocde jwt
-    // make sure csrfToken in body matches one in JWT
-    jwt.verify(accessToken, 'sec')
-    //
+
+    const client = new OAuth2Client();
+     const ticket = await client.verifyIdToken({
+      idToken: accessToken,
+      audience: process.env.CLIENT_ID as string,  
+    });
+    const payload = ticket.getPayload();
+    console.log(payload)
     try {
         const email = req.params.email as string
         const userRepository = dataSource.getRepository(User)
