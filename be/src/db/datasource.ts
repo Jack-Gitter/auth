@@ -1,7 +1,7 @@
 import { DataSource } from "typeorm"
-import { UserRole } from "./entities/Role"
 import { User } from "./entities/User"
 import { configDotenv } from "dotenv"
+import { Role } from "./entities/Role"
 configDotenv()
 
 export const appDataSource = new DataSource({
@@ -11,6 +11,6 @@ export const appDataSource = new DataSource({
     username: process.env.POSTGRES_USER ?? ' ',
     password: process.env.POSTGRES_PASSWORD ?? ' ',
     database: process.env.POSTGRES_DB ?? ' ',
-    entities: [UserRole, User],
+    entities: [Role, User],
     migrations: [],
 })
