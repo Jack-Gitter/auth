@@ -18,7 +18,7 @@ async function main() {
       res.send('Hello World!')
     })
 
-    app.post('/google/login/:email', auth)
+    app.post('/login/google/:email', auth)
     app.post('/role/:type', addRole)
 
     app.patch('/user/:email/role/:type', giveRole)
