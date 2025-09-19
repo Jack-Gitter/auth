@@ -1,9 +1,9 @@
 import express from 'express'
 import "reflect-metadata"
-import dotenv from 'dotenv'
+import { configDotenv } from 'dotenv'
+configDotenv()
 
 const app = express()
-dotenv.config()
 const port = 3000
 
 app.get('/', (req, res) => {
