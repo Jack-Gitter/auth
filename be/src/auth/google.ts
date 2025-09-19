@@ -12,7 +12,6 @@ export async function auth(req: Request, res: Response) {
         if (!user) {
              user = await userRepository.save({email})
         }
-        console.log(user)
         const userRoles = user?.roles?.map(role => role.type)
         const jwtPayload: JWTPayload = {
             roles: userRoles ?? []
