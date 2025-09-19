@@ -3,6 +3,7 @@ import { User } from "./entities/User"
 import { configDotenv } from "dotenv"
 import { Role } from "./entities/Role"
 import { Migrations1758290248287 } from "./migrations/1758290248287-migrations"
+import { Migrations1758290551813 } from "./migrations/1758290551813-migrations"
 configDotenv()
 
 export const appDataSource = new DataSource({
@@ -13,5 +14,5 @@ export const appDataSource = new DataSource({
     password: process.env.POSTGRES_PASSWORD ?? ' ',
     database: process.env.POSTGRES_DB ?? ' ',
     entities: [Role, User],
-    migrations: [Migrations1758290248287],
+    migrations: [Migrations1758290248287, Migrations1758290551813],
 })
