@@ -1,7 +1,7 @@
 import { dataSource } from "../db/datasource"
 import { User } from "../db/entities/User"
 import jwt from 'jsonwebtoken'
-import { JWTPayload } from "../types"
+import { AUTH_PROVIDER, JWTPayload } from "../types"
 import { Request, Response } from 'express'
 
 export async function auth(req: Request, res: Response) {
@@ -19,7 +19,9 @@ export async function auth(req: Request, res: Response) {
         }
         const roles = user.roles.map(role => role.type)
         const jwtPayload: JWTPayload = {
-            roles: roles 
+            roles: roles, 
+            authProvider: AUTH_PROVIDER.google,
+            accessToken: ''
         }
         const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '')
         res.send(token)
