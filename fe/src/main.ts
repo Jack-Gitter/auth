@@ -9,10 +9,10 @@ async function main() {
         res.send('<h1>hi</h1>')
     })
 
-    app.get('/login_id_token', (req, res) => {
+    app.get('/login/google_id_token', (req, res) => {
         res.sendFile(__dirname + '/login/google_id_token/index.html')
     })
-    app.get('/login_access_token', (req, res) => {
+    app.get('/login/google_access_token', (req, res) => {
         res.sendFile(__dirname + '/login/google_access_token/index.html')
     })
 
