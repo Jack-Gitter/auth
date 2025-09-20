@@ -20,7 +20,7 @@ async function main() {
     const port = 3000
     await dataSource.initialize()
 
-    app.post('/login/google', auth)
+    app.post('/login/id/google', auth)
     app.post('/role/:type', addRole)
 
     app.patch('/user/:email/role/:type', giveRole)
