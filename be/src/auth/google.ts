@@ -22,8 +22,6 @@ export async function auth(req: Request, res: Response) {
     const payload = ticket.getPayload();
     try {
         const email = payload?.email as string
-        const firstName = payload?.given_name 
-        const lastName = payload?.family_name
         const exp = payload?.exp ?? 60 * 60
         const userRepository = dataSource.getRepository(User)
         let user = await userRepository.findOne({ where: {email}, relations: ['roles']})
@@ -33,8 +31,7 @@ export async function auth(req: Request, res: Response) {
         user.roles = user.roles ?? []
         const roles = user.roles.map(role => role.type)
         const jwtPayload: JWTPayload = {
-            firstName,
-            lastName,
+            ...payload,
             sub: email,
             iss: 'Test App',
             aud: 'Test App',

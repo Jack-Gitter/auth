@@ -16,7 +16,5 @@ export type JWTPayload = {
     roles: ROLE_TYPE[]
     authProvider: AUTH_PROVIDER
     accessToken: string
-    firstName: string | undefined,
-    lastName: string | undefined,
 }
 
