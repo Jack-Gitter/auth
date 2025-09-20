@@ -7,7 +7,7 @@ import {OAuth2Client} from 'google-auth-library'
 
 // change the email to the jwt access token provided by google login
 export async function auth(req: Request, res: Response) {
-    const accessToken = req.body.credential as string
+    const IDToken = req.body.credential as string
     const csrfToken = req.body.g_csrf_token as string
     const csrfCookie = req.cookies.g_csrf_token as string
     if (csrfToken !== csrfCookie) {
@@ -16,7 +16,7 @@ export async function auth(req: Request, res: Response) {
 
     const client = new OAuth2Client();
      const ticket = await client.verifyIdToken({
-      idToken: accessToken,
+      idToken: IDToken,
       audience: process.env.CLIENT_ID as string,  
     });
     const payload = ticket.getPayload();
