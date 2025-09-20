@@ -24,6 +24,7 @@ export async function auth(req: Request, res: Response) {
         const email = payload?.email as string
         const firstName = payload?.given_name 
         const lastName = payload?.family_name
+        const exp = payload?.exp ?? 60 * 60
         const userRepository = dataSource.getRepository(User)
         let user = await userRepository.findOne({ where: {email}, relations: ['roles']})
         if (!user) {
@@ -42,7 +43,7 @@ export async function auth(req: Request, res: Response) {
             accessToken: accessToken
         }
         // need to make the expire the same as the access token
-        const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '', {expiresIn: 60 * 60})
+        const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '', {expiresIn: exp})
         res.send(token)
     } catch (error) {
         if (error instanceof Error) {
