@@ -11,9 +11,12 @@
   "license": "ISC",
   "type": "commonjs",
   "dependencies": {
+    "@googleapis/docs": "^6.0.0",
     "@types/cookie-parser": "^1.4.9",
     "@types/express": "^5.0.3",
     "cookie-parser": "^1.4.7",
-    "express": "^5.1.0"
+    "dotenv": "^17.2.2",
+    "express": "^5.1.0",
+    "googleapis": "^160.0.0"
   }
 }
