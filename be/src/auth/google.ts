@@ -20,28 +20,28 @@ export async function auth(req: Request, res: Response) {
       audience: process.env.CLIENT_ID as string,  
     });
     const payload = ticket.getPayload();
-    console.log(payload)
     try {
-        const email = req.params.email as string
+        const email = payload?.email as string
+        const firstName = payload?.given_name 
+        const lastName = payload?.family_name
         const userRepository = dataSource.getRepository(User)
-        let user = await userRepository.findOne(
-            {
-                where: {email},
-                relations: ['roles']
-            }
-        )
+        let user = await userRepository.findOne({ where: {email}, relations: ['roles']})
         if (!user) {
              user = await userRepository.save({email})
         }
+        user.roles = user.roles ?? []
         const roles = user.roles.map(role => role.type)
         const jwtPayload: JWTPayload = {
+            firstName,
+            lastName,
             sub: email,
             iss: 'Test App',
             aud: 'Test App',
             roles: roles, 
             authProvider: AUTH_PROVIDER.google,
-            accessToken: ''
+            accessToken: accessToken
         }
+        // need to make the expire the same as the access token
         const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '', {expiresIn: 60 * 60})
         res.send(token)
     } catch (error) {
