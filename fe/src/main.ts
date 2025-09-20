@@ -2,12 +2,12 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import {google} from 'googleapis'
 import { configDotenv } from 'dotenv'
-configDotenv()
 
 async function main() {
 
     const app = express()
     app.use(cookieParser())
+    configDotenv()
     const port = 3001
 
     app.get('/', (req, res) => {
