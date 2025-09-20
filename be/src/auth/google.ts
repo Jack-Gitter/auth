@@ -22,7 +22,6 @@ export async function auth(req: Request, res: Response) {
     const payload = ticket.getPayload();
     try {
         const email = payload?.email as string
-        const exp = payload?.exp ?? 60 * 60
         const userRepository = dataSource.getRepository(User)
         let user = await userRepository.findOne({ where: {email}, relations: ['roles']})
         if (!user) {
@@ -39,8 +38,8 @@ export async function auth(req: Request, res: Response) {
             authProvider: AUTH_PROVIDER.google,
             accessToken: accessToken
         }
-        const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '', {expiresIn: exp})
-        res.send(token)
+        const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '')
+        res.cookie('jwt', token, {maxAge: payload?.exp ?? 0 - Date.now(), httpOnly: true}).redirect('http://localhost:3001')
     } catch (error) {
         if (error instanceof Error) {
             res.status(400).send(error.message)
