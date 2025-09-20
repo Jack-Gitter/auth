@@ -4,6 +4,7 @@ import cookieParser from 'cookie-parser'
 async function main() {
 
     const app = express()
+    app.use(cookieParser())
     const port = 3001
 
     app.get('/', (req, res) => {
@@ -11,6 +12,9 @@ async function main() {
     })
 
     app.get('/login/google_id_token', (req, res) => {
+        if (req.cookies.jwt) {
+            res.redirect('http://localhost:3001')
+        }
         res.sendFile(__dirname + '/login/google_id_token/index.html')
     })
     app.get('/login/google_access_token', (req, res) => {
