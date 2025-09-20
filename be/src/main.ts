@@ -2,12 +2,13 @@ import express from 'express'
 import "reflect-metadata"
 import { configDotenv } from 'dotenv'
 import { dataSource } from './db/datasource'
-import { auth } from './auth/google'
+import { auth_id_token } from './auth/google_id_token'
 import { addRole } from './role/add-role'
 import { giveRole } from './role/give-role'
 import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
+import { auth_access_token } from './auth/google_access_token'
 
 
 async function main() {
@@ -22,9 +23,9 @@ async function main() {
     const port = 3000
     await dataSource.initialize()
 
-    app.post('/login/id/google', auth)
+    app.post('/login/id/google', auth_id_token)
+    app.post('/login/access/google', auth_access_token)
     app.post('/role/:type', addRole)
-    app.post('/login/access/google', (req, res) => (res.send()))
 
     app.patch('/user/:email/role/:type', giveRole)
 
