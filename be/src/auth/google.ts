@@ -38,7 +38,7 @@ export async function auth(req: Request, res: Response) {
             authProvider: AUTH_PROVIDER.google,
         }
         const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '')
-        res.cookie('jwt', token, {maxAge: 60 * 60, httpOnly: true}).redirect('http://localhost:3001')
+        res.cookie('jwt', token, {maxAge: Date.now() + 60 * 60, httpOnly: true}).redirect('http://localhost:3001')
     } catch (error) {
         if (error instanceof Error) {
             res.status(400).send(error.message)
