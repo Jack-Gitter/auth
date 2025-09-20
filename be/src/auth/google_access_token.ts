@@ -9,7 +9,7 @@ export async function auth_access_token(req: Request, res: Response) {
     const oauth2Client = new google.auth.OAuth2({
             clientId: process.env.CLIENT_ID ?? '',
             clientSecret: process.env.CLIENT_SECRET ?? '',
-            redirectUri: 'http://localhost:3000'
+            redirectUri: 'http://localhost:3000/login/access/google'
         }
     );
     try {
