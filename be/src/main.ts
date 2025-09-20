@@ -24,7 +24,7 @@ async function main() {
     await dataSource.initialize()
 
     app.post('/login/id/google', auth_id_token)
-    app.post('/login/access/google', auth_access_token)
+    app.get('/login/access/google', auth_access_token)
     app.post('/role/:type', addRole)
 
     app.patch('/user/:email/role/:type', giveRole)

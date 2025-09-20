@@ -1,26 +1,22 @@
 import { google } from 'googleapis'
+
 import {Request, Response} from 'express'
 
 
 export async function auth_access_token(req: Request, res: Response) {
+    console.log(req.params.code)
+    const code = req.params.code as string
+    console.log(process.env.client_id)
 
     const oauth2Client = new google.auth.OAuth2(
-        process.env.CLIENT_ID,
-        process.env.CLIENT_SECRET,
-        'http://localhost:3000/'
-    );
+        {
+            clientId: process.env.CLIENT_ID ?? '',
+            clientSecret: process.env.CLIENT_SECRET ?? '',
+        })
+    const {tokens} = await oauth2Client.getToken(code)
+    // oauth2Client.setCredentials(tokens);
+    console.log(tokens)
+    res.send(200)
 
-    const scopes = [
-      'https://www.googleapis.com/auth/blogger',
-      'https://www.googleapis.com/auth/calendar'
-    ];
-
-    const url = oauth2Client.generateAuthUrl({
-      access_type: 'offline',
-      scope: scopes
-    });
-
-
-    res.redirect(url)
 
 }
