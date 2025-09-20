@@ -42,7 +42,6 @@ export async function auth(req: Request, res: Response) {
             authProvider: AUTH_PROVIDER.google,
             accessToken: accessToken
         }
-        // need to make the expire the same as the access token
         const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '', {expiresIn: exp})
         res.send(token)
     } catch (error) {
