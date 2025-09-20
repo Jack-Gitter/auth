@@ -22,7 +22,7 @@ async function main() {
         }
     })
 
-    app.get('/test', (req, res) =>{
+    app.get('/login/access/google', (req, res) =>{
         const oauth2Client = new google.auth.OAuth2({
             clientId: process.env.CLIENT_ID ?? '',
             clientSecret: process.env.CLIENT_SECRET ?? '',

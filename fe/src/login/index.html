@@ -67,19 +67,14 @@
     <script src="https://accounts.google.com/gsi/client" async></script>
     
     <script>
-        function requestAccessToken() {
-            fetch('http://localhost:3000/login/access/google', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            })
+        function redirect() {
+            window.location.href = "http://localhost:3001/login/access/google";
         }
     </script>
     
     <div class="auth-container">
         <h1 class="auth-title">Google Access Token Auth</h1>
-        <button class="access-token-btn" onclick="requestAccessToken()">Get Access Token</button>
+        <button class="access-token-btn" onclick="redirect()">Get Access Token</button>
     </div>
     
     <div class="auth-container">
