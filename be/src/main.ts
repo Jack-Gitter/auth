@@ -14,7 +14,6 @@ import { auth_access_token } from './auth/google_access_token'
 async function main() {
 
     configDotenv()
-    console.log(process.env.client_id)
     const app = express()
     app.use(bodyParser.urlencoded())
     app.use(bodyParser.json())
