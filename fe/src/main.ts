@@ -26,7 +26,7 @@ async function main() {
         const oauth2Client = new google.auth.OAuth2({
             clientId: process.env.CLIENT_ID ?? '',
             clientSecret: process.env.CLIENT_SECRET ?? '',
-            redirectUri: 'http://localhost:3000/login/access/google'
+            redirectUri: 'http://localhost:3001/test/test'
             }
         );
 
@@ -39,7 +39,6 @@ async function main() {
           access_type: 'offline',
           scope: scopes
         });
-
 
         res.redirect(url)
 
