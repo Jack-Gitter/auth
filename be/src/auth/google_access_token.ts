@@ -21,6 +21,9 @@ export async function auth_access_token(req: Request, res: Response) {
         const refreshToken = tokens.refresh_token
         const expiresIn = tokens.expiry_date ?? Date.now() + 60 * 60
 
+        const response = await fetch( `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}`)
+        console.log(response)
+
 
         // get the email via the access token
         const email = ''
