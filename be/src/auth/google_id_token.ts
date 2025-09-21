@@ -35,6 +35,8 @@ export async function auth_id_token(req: Request, res: Response) {
             iss: 'Test App',
             aud: 'Test App',
             roles: roles, 
+            accessToken: undefined,
+            refreshToken: undefined,
             authProvider: AUTH_PROVIDER.google,
         }
         const token = jwt.sign(jwtPayload, process.env.JWT_SECRET ?? '')
