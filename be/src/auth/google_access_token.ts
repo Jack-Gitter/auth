@@ -48,9 +48,10 @@ export async function auth_access_token(req: Request, res: Response) {
         res.cookie('jwt', token, {maxAge: expiresIn}).redirect('http://localhost:3001')
         console.log(tokens)
     } catch (e) {
-        console.log(e)
+        if (e instanceof Error) {
+            res.status(400).send(e.message)
+        } else {
+            res.status(500).send('Something went wrong')
+        }
     }
-    res.send(200)
-
-
 }
