@@ -26,6 +26,10 @@ async function main() {
     app.post('/login/id/google', auth_id_token)
     app.get('/login/access/google', auth_access_token)
     app.post('/role/:type', addRole)
+    app.get('/login/stytch', (req, res) => {
+        console.log(req)
+        res.send()
+    })
 
     app.patch('/user/:email/role/:type', giveRole)
 

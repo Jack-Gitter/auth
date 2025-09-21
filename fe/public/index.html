@@ -118,6 +118,10 @@
     </div>
     
     <div class="main-content">
+
+        <div class="auth-container">
+            <div id="stytch-sdk"></div>
+        </div>
         <div class="auth-container">
             <h1 class="auth-title">Google Access Token Auth</h1>
             <button class="access-token-btn" onclick="redirect()">Get Access Token</button>
@@ -191,5 +195,7 @@
         // Update status on page load
         updateStatus();
     </script>
+
+    <script type="module" src="login/stytch.js"></script>
 </body>
 </html>
