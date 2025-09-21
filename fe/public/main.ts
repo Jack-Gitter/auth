@@ -5,9 +5,11 @@ import { redirect_to_google_acess_token_auth } from './login/access_token_google
 
 async function main() {
 
+    configDotenv()
+
     const app = express()
     app.use(cookieParser())
-    configDotenv()
+    app.use(express.static('public'))
     const port = 3001
 
     app.get('/', (req, res) => {
