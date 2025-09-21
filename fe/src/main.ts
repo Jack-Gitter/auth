@@ -11,7 +11,7 @@ async function main() {
     const port = 3001
 
     app.get('/', (req, res) => {
-        res.sendFile(__dirname + '/login/index.html')
+        res.sendFile(__dirname + '/index.html')
     })
 
     app.get('/login/access/google', (req, res) =>{
