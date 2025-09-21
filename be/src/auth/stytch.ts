@@ -30,7 +30,7 @@ export async function stytchAuth(req: Request, res: Response) {
     }
     userResponse.roles = userResponse.roles ?? []
     const roles = user.roles.map(role => role.type)
-    const ourJWT: JWTPayload = {
+    const ourjwt: JWTPayload = {
         ...content,
         aud: 'Test Auth',
         iss: 'Test Auth',
@@ -40,6 +40,6 @@ export async function stytchAuth(req: Request, res: Response) {
         accessToken: undefined,
         refreshToken: undefined
     }
-    res.send(ourJWT)
+    res.cookie('jwt', ourjwt, {maxAge: Date.now() + 60 * 60}).redirect('http://localhost:3001')
 
 }
