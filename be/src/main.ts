@@ -9,6 +9,7 @@ import bodyParser from 'body-parser'
 import cookieParser from 'cookie-parser'
 import cors from 'cors'
 import { auth_access_token } from './auth/google_access_token'
+import { stytchAuth } from './auth/stytch'
 
 
 async function main() {
@@ -26,11 +27,7 @@ async function main() {
     app.post('/login/id/google', auth_id_token)
     app.get('/login/access/google', auth_access_token)
     app.post('/role/:type', addRole)
-    app.get('/login/stytch', (req, res) => {
-        console.log(req.query)
-        res.send()
-    })
-
+    app.get('/login/stytch', stytchAuth)
     app.patch('/user/:email/role/:type', giveRole)
 
     app.listen(port, () => {

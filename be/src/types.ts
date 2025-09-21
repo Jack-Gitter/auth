@@ -6,7 +6,8 @@ export enum ROLE_TYPE {
 }
 
 export enum AUTH_PROVIDER {
-    google = 'google'
+    google = 'google',
+    stytch = 'stytch'
 }
 
 export type JWTPayload = {

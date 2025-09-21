@@ -1,5 +1,6 @@
 import {Request, Response} from 'express'
 import stytch from 'stytch'
+import { AUTH_PROVIDER, JWTPayload } from '../types';
 
 export async function stytchAuth(req: Request, res: Response) {
 
@@ -15,8 +16,20 @@ export async function stytchAuth(req: Request, res: Response) {
       session_duration_minutes: 60,
     };
 
-    const something = await client.magicLinks.authenticate(params)
-    console.log(something)
-    res.send()
+    const response = await client.magicLinks.authenticate(params)
+    const jwt = response.session_jwt
+    const content = await client.sessions.authenticateJwtLocal({session_jwt: jwt})
+    // find our user, create our own jwt
+    const ourJWT: JWTPayload = {
+        ...content,
+        aud: 'Test Auth',
+        iss: 'Test Auth',
+        sub: 'user',
+        roles: [],
+        authProvider: AUTH_PROVIDER.stytch,
+        accessToken: undefined,
+        refreshToken: undefined
+    }
+    res.send(ourJWT)
 
 }
