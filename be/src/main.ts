@@ -27,7 +27,7 @@ async function main() {
     app.get('/login/access/google', auth_access_token)
     app.post('/role/:type', addRole)
     app.get('/login/stytch', (req, res) => {
-        console.log(req)
+        console.log(req.query)
         res.send()
     })
 
