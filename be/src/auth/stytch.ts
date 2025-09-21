@@ -30,7 +30,6 @@ export async function stytchAuth(req: Request, res: Response) {
     }
     userResponse.roles = userResponse.roles ?? []
     const roles = user.roles.map(role => role.type)
-    // find our user, create our own jwt
     const ourJWT: JWTPayload = {
         ...content,
         aud: 'Test Auth',
