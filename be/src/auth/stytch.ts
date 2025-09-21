@@ -47,7 +47,6 @@ export async function stytchAuth(req: Request, res: Response) {
                 res.status(400).send(error.message)
             } else {
                 res.status(500).send('Something went wrong')
-
             }
         }
 }
