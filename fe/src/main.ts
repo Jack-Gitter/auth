@@ -2,6 +2,7 @@ import express from 'express'
 import cookieParser from 'cookie-parser'
 import {google} from 'googleapis'
 import { configDotenv } from 'dotenv'
+import { redirect_to_google_acess_token_auth } from './login/access_token_google'
 
 async function main() {
 
@@ -14,32 +15,10 @@ async function main() {
         res.sendFile(__dirname + '/index.html')
     })
 
-    app.get('/login/access/google', (req, res) =>{
-        const oauth2Client = new google.auth.OAuth2({
-            clientId: process.env.CLIENT_ID ?? '',
-            clientSecret: process.env.CLIENT_SECRET ?? '',
-            redirectUri: 'http://localhost:3000/login/access/google'
-            }
-        );
-
-        const scopes = [
-          'https://www.googleapis.com/auth/blogger',
-          'https://www.googleapis.com/auth/calendar',
-          'https://www.googleapis.com/auth/userinfo.email',
-          'https://www.googleapis.com/auth/userinfo.profile'
-        ];
-
-        const url = oauth2Client.generateAuthUrl({
-          access_type: 'offline',
-          scope: scopes
-        });
-
-        res.redirect(url)
-
-    })
+    app.get('/login/access/google',redirect_to_google_acess_token_auth)
 
     app.listen(port, () => {
-      console.log(`Example app listening on port ${port}`)
+      console.log(`FE listening on port ${port}`)
     })
 }
 
