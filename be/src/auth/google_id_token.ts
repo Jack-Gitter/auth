@@ -5,7 +5,6 @@ import { AUTH_PROVIDER, JWTPayload } from "../types"
 import { Request, Response } from 'express'
 import {OAuth2Client} from 'google-auth-library'
 
-// change the email to the jwt access token provided by google login
 export async function auth_id_token(req: Request, res: Response) {
     const IdToken = req.body.credential as string
     const csrfToken = req.body.g_csrf_token as string
