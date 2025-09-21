@@ -11,15 +11,7 @@ async function main() {
     const port = 3001
 
     app.get('/', (req, res) => {
-        res.sendFile(__dirname + '/index.html')
-    })
-
-    app.get('/login', (req, res) => {
-        if (req.cookies.jwt) {
-            res.redirect('http://localhost:3001')
-        } else {
-            res.sendFile(__dirname + '/login/index.html')
-        }
+        res.sendFile(__dirname + '/login/index.html')
     })
 
     app.get('/login/access/google', (req, res) =>{
