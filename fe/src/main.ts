@@ -32,7 +32,9 @@ async function main() {
 
         const scopes = [
           'https://www.googleapis.com/auth/blogger',
-          'https://www.googleapis.com/auth/calendar'
+          'https://www.googleapis.com/auth/calendar',
+          'https://www.googleapis.com/auth/userinfo.email',
+          'https://www.googleapis.com/auth/userinfo.profile'
         ];
 
         const url = oauth2Client.generateAuthUrl({
