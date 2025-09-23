@@ -1,0 +1,54 @@
+[server]
+http_port = 3000
+domain = localhost
+root_url = http://localhost:3000
+
+[auth]
+# Disable built-in login form (optional)
+disable_login_form = false
+# Disable user signup
+disable_signout_menu = false
+# Set to true if you want OAuth to be the only login method
+# disable_login_form = true
+
+[auth.generic_oauth]
+enabled = true
+name = OAuth
+client_id = YOUR_CLIENT_ID
+client_secret = YOUR_CLIENT_SECRET
+scopes = openid profile email
+auth_url = https://your-oauth-provider.com/oauth/authorize
+token_url = https://your-oauth-provider.com/oauth/token
+api_url = https://your-oauth-provider.com/userinfo
+allowed_domains = 
+allow_sign_up = true
+role_attribute_path = 
+role_attribute_strict = false
+# Auto-assign organization role for new users
+auto_login = false
+
+# Email attribute mapping (adjust based on your OAuth provider)
+email_attribute_name = email
+email_attribute_path = email
+
+# Name attribute mapping
+name_attribute_path = name
+
+# Login attribute (usually 'preferred_username' or 'email')
+login_attribute_path = preferred_username
+
+# Groups/roles mapping (optional)
+groups_attribute_path = groups
+
+[security]
+admin_user = admin
+admin_password = admin123
+allow_embedding = false
+
+[users]
+# Allow users to sign up / register themselves
+allow_sign_up = true
+# Auto assign organization role to new users
+auto_assign_org_role = Viewer
+# Default organization role for new users
+default_theme = dark
